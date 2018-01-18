@@ -25,7 +25,7 @@ Today this combination, a theoretical introduction and hands-on code examples, i
 Better store an encrypted representation of a password in your database (using a hash function) to prevent credential theft. But this alone won't mitigate against the vulnerability to man-in-the-middle attacks. An attacker could easily intercept the transmitted hash value and use it for authentication ("spoofing"). In this case a hash value would be nothing but a surrogate for a plain-text password. Instead a "salted" hash approach should be used to address the risk of "spoofing".
 
 <br/>
-![salted hash authentication procedure](https://raw.githubusercontent.com/mgbeyer/saltedhash/master/1221_01.jpg)
+<img src="1221_01.jpg"/>
 <br/><br/>
 
 >**_The salted hash authentication sequence_** &nbsp;&nbsp; 
