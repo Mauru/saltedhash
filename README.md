@@ -7,7 +7,7 @@ Michael Beyer, 2006/07, rev. 0.2 (revised 2018/01/17)
 
 <br/>
 <a name="_top"></a>
-Why is authentication against a password hash alone a security risk? How does a more secure approach - the "salted hash" authorization - looks like in practice? What is a typical authorization sequence utilizing the salted hash approach? And how come this procedure is safe? This is not intuitively obvious at first sight.
+Why is authentication against a password hash alone a security risk? What does a more secure approach - the "salted hash" authorization - looks like in practice? What is a typical authorization sequence utilizing the salted hash approach? And how come this procedure is safe? This is not intuitively obvious at first sight.
 
 Those were the kinds of questions which came to my mind over 10 years ago, when I was in the process of writing my diploma thesis dealing with web application security and different attack vectors. The salted hash approach for authentication was just a tiny fraction in a single chapter in my 140 pages mini book I wrote back then. There was just a sequence diagram and a small passage of explanatory text to convey the notion what salted hash authentication means in theory. A real-life code example followed only after over a year later when I first needed practical salted hash authentication for one of my own software projects.
 
