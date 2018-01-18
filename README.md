@@ -25,7 +25,7 @@ Today this combination, a theoretical introduction and hands-on code examples, i
 Better store an encrypted representation of a password in your database (using a hash function) to prevent credential theft. But this alone won't mitigate against the vulnerability to man-in-the-middle attacks. An attacker could easily intercept the transmitted hash value and use it for authentication ("spoofing"). In this case a hash value would be nothing but a surrogate for a plain-text password. Instead a "salted" hash approach should be used to address the risk of "spoofing".
 
 <br/>
-![salted hash authentication procedure](https://raw.githubusercontent.com/mgbeyer/saltedhash/master/1221_01.jpg)
+[![salted hash authentication procedure](https://raw.githubusercontent.com/mgbeyer/saltedhash/master/1221_01.jpg "salted hash authentication procedure")]
 <br/><br/>
 
 >**_The salted hash authentication sequence_** &nbsp;&nbsp; 
@@ -63,25 +63,12 @@ Um die Sicherheit dieses Verfahrens zu gewährleisten, muß der Zufallswert "Sal
 <br/>
 ### A little code example [(^)](#_top)
 
-* sha256hash.js
-<br/>
-JavaScript library to perform sha256 hashing.
-* hashtest.php
-<br/>
-PHP script to demonstrate the equivalence of PHP's hash function and the "sha256hash.js" library.
-* aj_saltedHashServer.php
-<br/>
-A PHP demo application to answer AJAX calls used to demonstrate the salted hash authentication process
-* xmlHttpLib2.js
-<br/>
-a rudimentary light-weight and pure JavaScript AJAX library
-* saltedHashClient.html
-<br/>
-Demonstrate salted hash authentication based on the demo server "aj_saltedHashServer.php" and the "xmlHttpLib2.js" AJAX library.
-* saltedHashClientJQ.html
-<br/>
-Demonstrate salted hash authentication based on the demo server "aj_saltedHashServer.php" and JQuery
-
+* **sha256hash.js** - JavaScript library to perform sha256 hashing.
+* **hashtest.php** - PHP script to demonstrate the equivalence of PHP's hash function and the "sha256hash.js" library.
+* **aj_saltedHashServer.php** - A PHP demo application to answer AJAX calls used to demonstrate the salted hash authentication process
+* **xmlHttpLib2.js** - a rudimentary light-weight and pure JavaScript AJAX library
+* **saltedHashClient.html** - Demonstrate salted hash authentication based on the demo server "aj_saltedHashServer.php" and the "xmlHttpLib2.js" AJAX library.
+* **saltedHashClientJQ.html** - Demonstrate salted hash authentication based on the demo server "aj_saltedHashServer.php" and JQuery
 
 
 
