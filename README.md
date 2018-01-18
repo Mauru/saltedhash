@@ -28,12 +28,13 @@ Better store an encrypted representation of a password in your database (using a
 <img src="1221_01.jpg"/>
 <br/><br/>
 
->**_The salted hash authentication sequence_** &nbsp;&nbsp; 
+>**_The salted hash authentication sequence_** 
 <br/><br/>
 
 After a user request (1) the server first responds by sending a random value to the browser, the so-called "salt" (2). A JavaScript method on the client side computes a hash value based on the user password (3), concatenates it with the "salt" value and from this computes a final hash value (4). Only this final hash value (called "digest") will be sent (along with a user ID) to the server (5). The server then fetches the hash value belonging to the user ID received from a database (6), appends the salt value to it and calculates the final hash value as done before by the client (7). Authentication is successful if both the final hash value from the client (user) and the final hash value from the server match (8).
 
 <br/>
+
 >**_Why is this procedure safe?_**
 <br/><br/>
 
