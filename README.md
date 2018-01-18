@@ -71,5 +71,8 @@ Um die Sicherheit dieses Verfahrens zu gewährleisten, muß der Zufallswert "Sal
 * **saltedHashClient.html** - Demonstrate salted hash authentication based on the demo server "aj_saltedHashServer.php" and the "xmlHttpLib2.js" AJAX library.
 * **saltedHashClientJQ.html** - Demonstrate salted hash authentication based on the demo server "aj_saltedHashServer.php" and JQuery
 
+Hint: For the client demos try user "hello@world.org" with password "TeSt123passWort".
+
+
 
 
