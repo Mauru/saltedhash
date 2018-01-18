@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+       "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>DEMO salted hash sha256 auth. with AJAX (native JS)</title>
+  <script type="text/javascript" src="sha256hash.js"></script>
+  <script type="text/javascript" src="xmlHttpLib2.js"></script>
+  <script type="text/javascript">
+   var DEBUG= "";
+   var HASH_ROUNDS= 350;
+
+   // some useful stuff :)
+   function elementById(name) {
+   	return eval('document.getElementById("'+name+'")');
+   }
+
+   function writeOutput(elem, text) {
+   	elementById(elem).innerHTML= text;
+   }
+
+   function debug(msg) {
+	DEBUG= DEBUG+"<br/>"+msg; writeOutput("output", DEBUG);
+   }
+
+	// callback functions
+	function isReceived(r) {
+		answer= r.responseText;
+		debug(answer);
+
+		param= answer.split("|"); cmd= param[0];
+
+		switch (cmd) {
+			case "S":
+				salt= param[1];
+			    // perform actual login
+				user= elementById('input_user').value; pass= elementById('input_pass').value;
+				digest= boldSHA256(boldSHA256(pass, HASH_ROUNDS)+salt, HASH_ROUNDS);
+			    url= "aj_saltedHashServer.php?c=login&u="+user+"&d="+digest;
+			    sendXMLHttpRequest(req, "get", url);
+			break;
+		}
+	}
+	function onError(r) {
+		rs= "?"
+		switch (r.readyState) {
+			case 2: rs= "isSent";
+			break;
+			case 3: rs= "isReceiving";
+			break;
+			case 4: rs= "isReceived";
+			break;
+		}
+		status= rs + ": " + r.status;
+		debug(status);
+	}
+
+   
+   var req= null;
+   function initAjax() {
+	req= getXMLHttpObject(isCreated, isOpened, isSent, isReceiving, isReceived, onError);
+   }
+   
+
+  function login() {
+	// fetch salt, proceed by callback...
+	url= "aj_saltedHashServer.php?c=init";   
+	sendXMLHttpRequest(req, "get", url);
+  }
+
+  function fetchPayload() {
+	url= "aj_saltedHashServer.php?c=data";
+	sendXMLHttpRequest(req, "get", url);
+  }
+  </script>
+</head>
+
+<body onload="initAjax()">
+<form name="theform" action="" method="POST">
+user: <br/>
+<input type="text" size="15" name="input_user" id="input_user">
+<br/>
+pass: <br/>
+<input type="text" size="15" name="input_pass" id="input_pass">
+<br/><br/>
+<input type="button" name="submit" value="send login" onclick="login()">
+<br/><br/>
+<input type="button" name="data" value="fetch data" onclick="fetchPayload()">
+</form>
+
+<br/><hr/>
+<div id="output"></div>
+
+</body>
+</html>

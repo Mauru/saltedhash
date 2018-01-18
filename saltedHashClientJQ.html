@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+       "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>DEMO salted hash sha256 auth. with AJAX (JQuery)</title>
+  <script type="text/javascript" src="sha256hash.js"></script>
+  <script src="https://code.jquery.com/jquery-2.2.3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+   var DEBUG= "";
+   var HASH_ROUNDS= 350;
+
+	// callback functions
+	function onSuccess(answer, status) {
+		debug(answer);
+
+		param= answer.split("|"); cmd= param[0];
+		switch (cmd) {
+			case "S":
+				salt= param[1];
+				// perform actual login
+				user= $('#input_user').val(); pass= $('#input_pass').val();
+				digest= boldSHA256(boldSHA256(pass, HASH_ROUNDS)+salt, HASH_ROUNDS);
+				doAjaxGET("aj_saltedHashServer.php?c=login&u="+user+"&d="+digest);
+			break;
+		}
+	}
+	function onError(xhr, status, error) {
+		debug(status + ": " + error);
+	}
+	
+	
+	function debug(msg) {
+		DEBUG= DEBUG+"<br/>"+msg; 
+		$('#output').html(DEBUG);
+	}
+
+	function doAjaxGET(url) {
+		$.ajax({
+			url: url, 
+			type: "GET",
+			success: onSuccess,
+			error: onError
+		});
+	}
+   
+	$(document).ready(function(){
+		$("#submit").click(function(){doAjaxGET("aj_saltedHashServer.php?c=init")});
+		$("#data").click(function(){doAjaxGET("aj_saltedHashServer.php?c=data")});
+	});
+  </script>
+</head>
+
+<body>
+<form name="theform" action="" method="POST">
+user: <br/>
+<input type="text" size="15" id="input_user">
+<br/>
+pass: <br/>
+<input type="text" size="15" id="input_pass">
+<br/><br/>
+<input type="button" id="submit" value="send login">
+<br/><br/>
+<input type="button" id="data" value="fetch data">
+</form>
+
+<br/><hr/>
+<div id="output"></div>
+
+</body>
+</html>
